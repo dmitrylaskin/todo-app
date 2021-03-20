@@ -1,0 +1,31 @@
+.todo__tasks-title {
+  display: flex;
+  align-items: center;
+}
+
+.todo__tasks-title-text {
+  font-size: 39px;
+}
+
+.todo__tasks-text {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.todo__tasks-icon {
+  display: inline-block;
+  min-width: 30px;
+  min-height: 30px;
+  border: 2px solid #E8E8E8;
+  border-radius: 50%;
+}
+
+.todo__tasks-check:checked ~ .todo__tasks-icon {
+  background: lightgreen;
+}
+
+.todo__tasks-icon {
+  background: lightcoral;
+}
+
+/*# sourceMappingURL=TaskItem.css.map */

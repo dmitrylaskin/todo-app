@@ -1,0 +1,32 @@
+.colorIcon {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #000;
+
+  &--color--green {
+    background: #42B883;
+  }
+  &--color--red {
+    background: #FF6464;
+  }
+  &--color--blue {
+    background: #64C4ED;
+  }
+  &--color--grey {
+    background: #FFBBCC;
+  }
+  &--color--lime {
+    background: #B6E6BD;
+  }
+  &--color--purple {
+    background: #C355F5;
+  }
+  &--color--black {
+    background: #4e4e53;
+  }
+  &--color--pink {
+    background: #C9D1D3;
+  }
+}

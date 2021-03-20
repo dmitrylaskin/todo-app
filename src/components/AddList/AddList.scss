@@ -1,0 +1,50 @@
+.addListForm {
+  background: #fff;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  width: 240px;
+  height: 165px;
+  padding: 20px;
+  border: 1px solid #ececec;
+  box-shadow: 1px 2px 20px #ececec;
+  border-radius: 5px;
+
+  &__img {
+      position: absolute;
+      bottom: 150px;
+      left: 225px;
+      cursor: pointer;
+  }
+  &__list {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+  }
+  &__item {
+    .colorIcon {
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      cursor: pointer;
+
+      &--active {
+        border: 2px solid #000;
+      }
+    }
+    //width: 20px;
+    //height: 20px;
+    //background: lightgreen;
+    //border-radius: 50%;
+
+  }
+  &__input {
+    border: 1px solid #ececec;
+    padding: 10px;
+    margin-bottom: 15px;
+    &::placeholder {
+      opacity: 0.7;
+    }
+  }
+
+}

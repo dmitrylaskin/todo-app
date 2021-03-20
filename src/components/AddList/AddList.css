@@ -1,0 +1,42 @@
+.addListForm {
+  background: #fff;
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  width: 240px;
+  height: 165px;
+  padding: 20px;
+  border: 1px solid #ececec;
+  box-shadow: 1px 2px 20px #ececec;
+  border-radius: 5px;
+}
+.addListForm__img {
+  position: absolute;
+  bottom: 150px;
+  left: 225px;
+  cursor: pointer;
+}
+.addListForm__list {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+.addListForm__item .colorIcon {
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+.addListForm__item .colorIcon--active {
+  border: 2px solid #000;
+}
+.addListForm__input {
+  border: 1px solid #ececec;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+.addListForm__input::placeholder {
+  opacity: 0.7;
+}
+
+/*# sourceMappingURL=AddList.css.map */

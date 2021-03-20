@@ -1,0 +1,33 @@
+.colorIcon {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #000;
+}
+.colorIcon--color--green {
+  background: #42B883;
+}
+.colorIcon--color--red {
+  background: #FF6464;
+}
+.colorIcon--color--blue {
+  background: #64C4ED;
+}
+.colorIcon--color--grey {
+  background: #FFBBCC;
+}
+.colorIcon--color--lime {
+  background: #B6E6BD;
+}
+.colorIcon--color--purple {
+  background: #C355F5;
+}
+.colorIcon--color--black {
+  background: #4e4e53;
+}
+.colorIcon--color--pink {
+  background: #C9D1D3;
+}
+
+/*# sourceMappingURL=Badge.css.map */
