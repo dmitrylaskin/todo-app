@@ -9,7 +9,7 @@ import axios from 'axios'
 
 
 const AddList = (props) => {
-    const [visibleAddBtn, setVisibleAddBtn] = useState(false)
+    const [visibleAddForm, setVisibleAddForm] = useState(false)
     const [activeColor, setActiveColor] = useState(1)
     const [inputValue, setInputValue] = useState('')
 
@@ -21,17 +21,14 @@ const AddList = (props) => {
 
    const btnListener = (event) => {
 
-
-    //    props.onAddList({
-    //        id: Date.now(),
-    //        name: inputValue,
-    //        colorId: activeColor,
-    //        color: props.colors.filter(color => color.id === activeColor)[0].name
-    //    })
+       if (!inputValue) {
+           alert('Field shouldn\'t be empty')
+           return
+       }
 
        setInputValue('')
        setActiveColor(1)
-       setVisibleAddBtn(false)
+       setVisibleAddForm(false)
 
        axios.post('http://localhost:3004/lists', {
            name: inputValue,
@@ -44,31 +41,31 @@ const AddList = (props) => {
        })
 
    }
+
    const inputListener = (event) => {
+       
         setInputValue(event.target.value)
     }
-
-
     return (
         <>
-            <div onClick={() => setVisibleAddBtn(true)}>
-                <List lists={[{id: 6, name: 'Add list'}]} icon={addSvg} isRemoveable={false}/>
-            </div>
+            
+                <List onClick={() => setVisibleAddForm(true)} lists={[{id: 22, name: 'Add list'}]} icon={addSvg} isRemoveable={false}/>
+          
 
-            {visibleAddBtn && <div className="addListForm">
-                <img onClick={() => setVisibleAddBtn(false)} className="addListForm__img" src={closeSvg} alt=""/>
-                <input className="addListForm__input" type="text" placeholder="enter the list name" onChange={(event) =>inputListener(event)} value={inputValue}/>
-                <ul className="addListForm__list">
+            {visibleAddForm && <div className="addListForm">
+                                    <img onClick={() => setVisibleAddForm(false)} className="addListForm__img" src={closeSvg} alt=""/>
+                                    <input className="addListForm__input" type="text" placeholder="enter the list name" onChange={(event) =>inputListener(event)} value={inputValue}/>
+                                    <ul className="addListForm__list">
 
-                    {props.colors.map(el => {
-                            return <li key={el.id} className="addListForm__item">
-                                <Badge color={el.name} id={el.id} setActiveColor={setActiveColor} activeColor={activeColor} />
-                            </li>
-                        }
-                    )}
-                </ul>
+                                        {props.colors.map(el => {
+                                                return <li key={el.id} className="addListForm__item">
+                                                    <Badge color={el.name} id={el.id} setActiveColor={setActiveColor} activeColor={activeColor} />
+                                                </li>
+                                            }
+                                        )}
+                                    </ul>
 
-                <button className="addListForm__btn btn" onClick={(event) => {btnListener(event)}} href="/">add list</button>
+                                    <button className="addListForm__btn btn" onClick={(event) => {btnListener(event)}} href="/">add list</button>
             </div>}
         </>
 

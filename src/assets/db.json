@@ -16,22 +16,16 @@
       "colorId": 3
     },
     {
-      "name": "Books",
+      "name": "Книги",
       "colorId": 8,
       "color": "red",
       "id": 5
     },
     {
-      "name": "ewewe",
-      "colorId": 7,
-      "color": "black",
-      "id": 7
-    },
-    {
-      "name": "yoyo",
-      "colorId": 3,
-      "color": "blue",
-      "id": 10
+      "name": "Фильмы",
+      "colorId": 6,
+      "color": "purple",
+      "id": 6
     }
   ],
   "tasks": [

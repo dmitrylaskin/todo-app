@@ -7,7 +7,7 @@ const List = (props) => {
 
 
     return (
-        <div>
+        <div onClick={props.onClick}>
             <ul className="sidebar__list" >
 
                     {props.lists.map(el => <ListItem key={el.id}
