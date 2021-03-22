@@ -38,6 +38,21 @@ function App() {
     const removeListItem = (listId) => {
         const newLists = lists.filter(listItem => listItem.id !== listId)
         setLists(newLists)
+        setActiveItem(lists[0])
+    }
+    const onEditListTitle = (id, title) => {
+        const newTitle = window.prompt('Enter task title', title)
+        if (!newTitle) return
+
+        const newLists = lists.map(list => {
+            if (list.id === id) {
+                list.name = newTitle
+            }
+            return list
+        })
+        setLists(newLists)
+        axios.patch(`http://localhost:3004/lists/${id}`, {name:newTitle})
+            .catch(() => alert('Server error'))
     }
 
     return (
@@ -69,7 +84,7 @@ function App() {
                 </div>
                 <div className="todo__tasks">
 
-                    {lists && activeItem && <TaskItem listItem={activeItem}/>}
+                    {lists && activeItem && <TaskItem listItem={activeItem} onEditListTitle={onEditListTitle}/>}
 
                 </div>
             </div>
