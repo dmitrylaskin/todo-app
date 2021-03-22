@@ -19,11 +19,6 @@
       "name": "New",
       "colorId": 4,
       "id": 5
-    },
-    {
-      "name": "new w",
-      "colorId": 5,
-      "id": 6
     }
   ],
   "tasks": [
@@ -56,6 +51,24 @@
       "text": "Купить 1984!",
       "completed": true,
       "id": 10
+    },
+    {
+      "listId": 1,
+      "text": "qq",
+      "completed": false,
+      "id": 11
+    },
+    {
+      "listId": 1,
+      "text": "rer",
+      "completed": false,
+      "id": 12
+    },
+    {
+      "listId": 1,
+      "text": "eeee",
+      "completed": false,
+      "id": 13
     }
   ],
   "colors": [

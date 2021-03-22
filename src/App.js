@@ -35,6 +35,16 @@ function App() {
         setLists(newLists)
 
     }
+    const onAddTaskItem = (id, newTask) => {
+        const newLists = lists.map(item => {
+
+            if (item.id === id) {
+                item.tasks = [...item.tasks, newTask]
+            }
+            return item
+        })
+        setLists(newLists)
+    }
     const removeListItem = (listId) => {
         const newLists = lists.filter(listItem => listItem.id !== listId)
         setLists(newLists)
@@ -84,7 +94,7 @@ function App() {
                 </div>
                 <div className="todo__tasks">
 
-                    {lists && activeItem && <TaskItem listItem={activeItem} onEditListTitle={onEditListTitle}/>}
+                    {lists && activeItem && <TaskItem listItem={activeItem} onEditListTitle={onEditListTitle} onAddTaskItem={onAddTaskItem}/>}
 
                 </div>
             </div>
