@@ -9,13 +9,15 @@ import axios from 'axios'
 
 
 const AddList = (props) => {
+
     const [visibleAddForm, setVisibleAddForm] = useState(false)
     const [activeColor, setActiveColor] = useState(1)
     const [inputValue, setInputValue] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         if (props.colors) {
-            setActiveColor(props.colors[2].id)
+            setActiveColor(props.colors[0].id)
         }
     }, [props.colors])
 
@@ -26,30 +28,34 @@ const AddList = (props) => {
            return
        }
 
+       setIsLoading(true)
        setInputValue('')
        setActiveColor(1)
-       setVisibleAddForm(false)
+       
 
        axios.post('http://localhost:3004/lists', {
            name: inputValue,
            colorId: activeColor,
-           color: props.colors.filter(color => color.id === activeColor)[0].name
+        //    color: props.colors.filter(color => color.id === activeColor)[0].name
        }).then(response => {
-           console.log(response.data);
-           props.onAddList(response.data)
 
-       })
+            
+            const color = props.colors.filter(color => color.id === activeColor)[0].name
+            const listItem = {...response.data, color: {name:color}}
+            
+            props.onAddList(listItem)
 
+            setIsLoading(false)
+            
+       }).finally(() => setVisibleAddForm(false))
    }
 
-   const inputListener = (event) => {
-       
-        setInputValue(event.target.value)
-    }
+   const inputListener = (event) => setInputValue(event.target.value)
+
     return (
         <>
             
-                <List onClick={() => setVisibleAddForm(true)} lists={[{id: 22, name: 'Add list'}]} icon={addSvg} isRemoveable={false}/>
+                <List onClick={() => setVisibleAddForm(true)} lists={[{id: 22, name: 'Add list'}]} icon={addSvg} isRemoveable={false} itemStyle={props.itemStyle}/>
           
 
             {visibleAddForm && <div className="addListForm">
@@ -65,7 +71,7 @@ const AddList = (props) => {
                                         )}
                                     </ul>
 
-                                    <button className="addListForm__btn btn" onClick={(event) => {btnListener(event)}} href="/">add list</button>
+                                    <button className="addListForm__btn btn" onClick={(event) => {btnListener(event)}} href="/">{isLoading ? 'Loading...' : 'Add list'}</button>
             </div>}
         </>
 

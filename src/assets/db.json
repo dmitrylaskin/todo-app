@@ -16,15 +16,13 @@
       "colorId": 3
     },
     {
-      "name": "Книги",
-      "colorId": 8,
-      "color": "red",
+      "name": "New",
+      "colorId": 4,
       "id": 5
     },
     {
-      "name": "Фильмы",
-      "colorId": 6,
-      "color": "purple",
+      "name": "qq",
+      "colorId": 5,
       "id": 6
     }
   ],

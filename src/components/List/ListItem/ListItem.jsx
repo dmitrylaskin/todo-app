@@ -17,7 +17,9 @@ const ListItem = (props) => {
     }
 
     return (
-        <li className={`sidebar__item ${props.active ? 'sidebar__item--active' : ''}`}>
+        <li className={`sidebar__item ${props.activeItem && props.activeItem.id === props.item.id ? 'sidebar__item--active' : ''}`}
+        onClick={props.onClickItem ? () => props.onClickItem(props.item) : null}>
+
             {props.icon
             ? <img className="sidebar__item-img" src={props.icon} alt=""/>
             : <Badge color={props.color}/>}
