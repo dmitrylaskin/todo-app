@@ -4,6 +4,7 @@ import editSvg from "../../assets/img/edit.svg"
 import checkSvg from "../../assets/img/check.svg"
 import TasksForm from "../TasksForm/TasksForm";
 import removeSvg from '../../assets/img/remove.svg';
+import {Link} from 'react-router-dom';
 
 const TaskItem = (props) => {
     
@@ -17,13 +18,17 @@ const TaskItem = (props) => {
         const removeHandler = (taskId, listId) => {
                 props.onRemoveTask(taskId, listId)
         }
+
+        const checkboxHandler = (taskId, listId, isComplited) => {
+                
+                props.onCompleteTask(taskId, listId, isComplited)
+        }
     
 
     return (
         <div className="content">
             <div className="todo__tasks-title">
-
-                <h2 className={`todo__tasks-title-text todo__tasks-title-text--${props.listItem.color}`}>{props.listItem.name}</h2>
+                <Link to={`/list/${props.listItem.id}`}><h2 className={`todo__tasks-title-text todo__tasks-title-text--${props.listItem.color}`}>{props.listItem.name}</h2></Link>
                 <img className="todo__tasks-title-icon" onClick={() => props.onEditListTitle(props.listItem.id, props.listItem.name)} src={editSvg} alt=""/>
             </div>
 
@@ -34,12 +39,16 @@ const TaskItem = (props) => {
 
                         <li key={task.id} className="todo__tasks-item">
                             <label className="todo__tasks-elem">
-                                <input className="todo__tasks-check" type="checkbox"/>
+                                
+                                <input className={`todo__tasks-check ${task.completed && 'todo__tasks-check'}`}  
+                                        type="checkbox" 
+                                        onChange={(event) => checkboxHandler(task.id, props.listItem.id, event.target.checked)}
+                                        checked={task.completed}/>
                                 <div className="todo__tasks-icon">
                                     <img src={checkSvg} alt=""/>
                                 </div>
                             </label>
-                            <p className="todo__tasks-text">{task.text}</p>
+                            <p className={`todo__tasks-text ${task.completed && 'todo__tasks-text--done'}`}>{task.text}</p>
 
                             <div className="controls">
                                 <img className="controls__edit" onClick={() => editHandler(task.id, props.listItem.id)} src={editSvg} alt=""/>

@@ -54,6 +54,9 @@
 .todo__tasks-text {
   flex: 1;
   font-size: 16px;
+  &--done {
+    text-decoration: line-through;
+  }
 
 }
 
@@ -66,6 +69,7 @@
 }
 .todo__tasks-check {
   display: none;
+
 
 }
 .todo__tasks-check:checked ~ .todo__tasks-icon{

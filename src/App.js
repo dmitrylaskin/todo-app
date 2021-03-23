@@ -119,6 +119,27 @@ function App() {
             .catch(() => alert('Server error'))
     }
 
+    const onCompleteTask = (taskId, listId, isCompleted) => {
+        console.log('3 status: ', taskId, listId, isCompleted);
+        axios.patch(`http://localhost:3004/tasks/${taskId}`, {completed:isCompleted})
+             .then(() => {
+                const newLists = lists.map(list => {
+                    if (list.id === listId) {
+                        list.completed = list.tasks.map(task => {
+                            if (task.id === taskId) {
+                                task.completed = isCompleted
+                        }
+                        return task
+                    })
+                    }
+                    return list
+                })
+                setLists(newLists)
+             })
+             .catch(() => alert('Server error'))
+
+    }
+
     return (
         
         <div className="container">
@@ -165,7 +186,8 @@ function App() {
                                                 onEditListTitle={onEditListTitle} 
                                                 onAddTaskItem={onAddTaskItem}
                                                 onEditTask={onEditTask}
-                                                onRemoveTask={onRemoveTask}/>}
+                                                onRemoveTask={onRemoveTask}
+                                                onCompleteTask={onCompleteTask}/>}
 
 
                 </div>
