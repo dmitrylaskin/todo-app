@@ -41,7 +41,7 @@ const AddList = (props) => {
 
             
             const color = props.colors.filter(color => color.id === activeColor)[0].name
-            const listItem = {...response.data, color: {name:color}}
+            const listItem = {...response.data, tasks:[], color: {name:color}}
             
             props.onAddList(listItem)
 

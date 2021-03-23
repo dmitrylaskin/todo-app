@@ -52,7 +52,9 @@
 
 }
 .todo__tasks-text {
+  flex: 1;
   font-size: 16px;
+
 }
 
 .todo__tasks-icon {
@@ -90,8 +92,15 @@
   display: flex;
   align-items: center;
   margin-bottom: 8px;
+  overflow: hidden;
+
   &:last-child {
     margin-bottom: 20px;
+  }
+  &:hover {
+    .controls {
+      opacity: 0.4;
+    }
   }
 }
 
@@ -106,4 +115,23 @@
   color: #C9D1D3;
   font-weight: 700;
   margin-bottom: 20px;
+}
+
+.controls {
+  opacity: 0;
+  transition: all 0.2s ease;
+  img {
+    border-radius: 5px;
+    padding: 4px;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: #c3c0c0;
+    }
+  }
+}
+.controls__edit {
+  margin-right: 10px;
 }

@@ -12,6 +12,7 @@ const List = (props) => {
          
                     {props.lists.map(el => <ListItem key={el.id}
                                                      item={el}
+                                                     allTasksActive={props.allTasksActive}
                                                      activeItem={props.activeItem}
                                                      onClickItem={props.onClickItem}
                                                      id={el.id}

@@ -1,6 +1,6 @@
 ## Todo app with JSON server
 
-##### Stack: React, Hooks, Axios, JSON Server
+##### Stack: React, Hooks, React-router, Axios, JSON Server
 
 ### Note: To run the app you need to install the [JSON Server](https://github.com/typicode/json-server)
 

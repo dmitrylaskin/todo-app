@@ -3,7 +3,8 @@ import '../List.scss'
 import removeSvg from "../../../assets/img/remove.svg";
 import cn from 'classnames'
 import Badge from "../../Badge/Badge";
-import axios from 'axios'
+import axios from 'axios';
+
 
 const ListItem = (props) => {
 
@@ -17,9 +18,9 @@ const ListItem = (props) => {
     }
 
     return (
-        <li className={`sidebar__item ${props.activeItem && props.activeItem.id === props.item.id ? 'sidebar__item--active' : ''}`}
-        onClick={props.onClickItem ? () => props.onClickItem(props.item) : null}>
-
+        <li className={`sidebar__item ${props.activeItem && props.activeItem.id === props.item.id ? 'sidebar__item--active' : ''} ${props.allTasksActive && 'sidebar__item--active'}`}
+            onClick={props.onClickItem ? () => props.onClickItem(props.item) : null}>
+        
             {props.icon
             ? <img className="sidebar__item-img" src={props.icon} alt=""/>
             : <Badge color={props.color}/>}

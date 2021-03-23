@@ -5,15 +5,16 @@ import AddList from "./components/AddList/AddList";
 import axios from 'axios'
 import './index.scss'
 import TaskItem from './components/TaskItem/TaskItem';
-import {Route, useHistory} from "react-router-dom";
+import {Route, useHistory, useLocation} from "react-router-dom";
 
 function App() {
     
     const [lists, setLists] = useState(null)
     const [colors, setColors] = useState(null)
     const [activeItem, setActiveItem] = useState(null)
-    let history = useHistory();
-
+    // Bag! Dnt work without useLocation
+    let history = useHistory()
+    let location = useLocation()
 
     useEffect(() => {
             axios.get('http://localhost:3004/lists?_expand=color&_embed=tasks')
@@ -29,19 +30,27 @@ function App() {
 
     }, [])
 
-    // useEffect(() => {
-    //     console.log(history.location.pathname)
-    // }, [history.location.pathname])
+    useEffect(() => {
+        const listId = history.location.pathname.split('list/')[1]
+      
+        if (lists) {
+            const list = lists.find(list => list.id === +listId)
+            setActiveItem(list)
+
+        }
+    },[lists, history.location.pathname])
+
 
     const onClickItem = (item) => {
-        setActiveItem(item)
-        history.push(`/lists/${item.id}`)
+        //setActiveItem(item)
+        history.push(`/list/${item.id}`)
     }
+
 
     const onAddList = (obj) => {
         const newLists = [...lists, obj]
         setLists(newLists)
-
+                
     }
 
     const onAddTaskItem = (id, newTask) => {
@@ -52,12 +61,15 @@ function App() {
             return item
         })
         setLists(newLists)
+        
     }
 
     const removeListItem = (listId) => {
         const newLists = lists.filter(listItem => listItem.id !== listId)
         setLists(newLists)
         setActiveItem(lists[0])
+        //history.push('/')
+
     }
 
     const onEditListTitle = (id, title) => {
@@ -75,6 +87,38 @@ function App() {
             .catch(() => alert('Server error'))
     }
 
+    const onEditTask = (taskId, listId, taskText) => {
+        axios.patch(`http://localhost:3004/tasks/${taskId}`, {text:taskText})
+             .then(() => {
+                const newLists = lists.map(list => {
+                    if (list.id === listId) {
+                        list.tasks = list.tasks.map(task => {
+                            if (task.id === taskId) {
+                                task.text = taskText
+                        }
+                        return task
+                    })
+                    }
+                    return list
+                })
+                setLists(newLists)
+             })
+
+    }
+    const onRemoveTask = (taskId, listId) => {
+        axios.delete(`http://localhost:3004/tasks/${taskId}`)
+            .then(() => {
+                const newLists = lists.map(list => {
+                    if (list.id === listId) {
+                        list.tasks = list.tasks.filter(task => task.id !== taskId)
+                    }
+                    return list
+                })
+                setLists(newLists)
+            })
+            .catch(() => alert('Server error'))
+    }
+
     return (
         
         <div className="container">
@@ -82,7 +126,7 @@ function App() {
                 <div className="todo__sidebar">
 
 {/* // All tasks */}
-                    <List lists={[{id: 21, name: 'All tasks'}]} icon={listSvg} isRemoveable={false} onClick={() => history.push('/')}/>
+                    <List lists={[{id: 21, name: 'All tasks'}]} icon={listSvg} isRemoveable={false} allTasksActive={!activeItem} onClick={() => history.push('/')}/>
 
 {/* // Added lists */}
 
@@ -103,10 +147,26 @@ function App() {
 {/* // Tasks */}
                 </div>
                 <div className="todo__tasks">
+                    {/* // All tasks render*/}
                     <Route exact path="/">
-                        {lists && activeItem && lists.map(list =><TaskItem key={list.id} listItem={list} onEditListTitle={onEditListTitle} onAddTaskItem={onAddTaskItem}/>)}
+                        {lists && lists.map(list =><TaskItem 
+                                                        key={list.id} 
+                                                        listItem={list} 
+                                                        onEditListTitle={onEditListTitle} 
+                                                        onAddTaskItem={onAddTaskItem}
+                                                        />)}
                     </Route>
-                    {lists && activeItem && <TaskItem listItem={activeItem} onEditListTitle={onEditListTitle} onAddTaskItem={onAddTaskItem}/>}
+
+                    {/* // Exact task*/}
+                    {lists && activeItem && <TaskItem
+                                                key={activeItem.id}
+                                                listId={lists}
+                                                listItem={activeItem} 
+                                                onEditListTitle={onEditListTitle} 
+                                                onAddTaskItem={onAddTaskItem}
+                                                onEditTask={onEditTask}
+                                                onRemoveTask={onRemoveTask}/>}
+
 
                 </div>
             </div>

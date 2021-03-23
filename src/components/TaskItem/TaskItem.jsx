@@ -3,8 +3,21 @@ import './TaskItem.scss';
 import editSvg from "../../assets/img/edit.svg"
 import checkSvg from "../../assets/img/check.svg"
 import TasksForm from "../TasksForm/TasksForm";
+import removeSvg from '../../assets/img/remove.svg';
 
 const TaskItem = (props) => {
+    
+    const editHandler = (taskId, listId) => {
+        const taskText = window.prompt('Enter your task')
+        if (taskText) {
+            props.onEditTask(taskId, listId, taskText)
+            }
+        }
+
+        const removeHandler = (taskId, listId) => {
+                props.onRemoveTask(taskId, listId)
+        }
+    
 
     return (
         <div className="content">
@@ -18,6 +31,7 @@ const TaskItem = (props) => {
                 ? <span className="no-tasks">No tasks</span>
                 : <ul className="todo__tasks-list">
                     {props.listItem.tasks.map(task =>
+
                         <li key={task.id} className="todo__tasks-item">
                             <label className="todo__tasks-elem">
                                 <input className="todo__tasks-check" type="checkbox"/>
@@ -26,6 +40,11 @@ const TaskItem = (props) => {
                                 </div>
                             </label>
                             <p className="todo__tasks-text">{task.text}</p>
+
+                            <div className="controls">
+                                <img className="controls__edit" onClick={() => editHandler(task.id, props.listItem.id)} src={editSvg} alt=""/>
+                                <img className="controls__remvoe" onClick={() => removeHandler(task.id, props.listItem.id)} src={removeSvg} alt=""/>
+                            </div>
                         </li>)}
                 </ul>}
 
