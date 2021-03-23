@@ -14,11 +14,6 @@
       "id": 4,
       "name": "Спорт",
       "colorId": 3
-    },
-    {
-      "name": "New",
-      "colorId": 4,
-      "id": 5
     }
   ],
   "tasks": [
@@ -69,6 +64,12 @@
       "text": "eeee",
       "completed": false,
       "id": 13
+    },
+    {
+      "listId": 3,
+      "text": "ewewewe",
+      "completed": false,
+      "id": 15
     }
   ],
   "colors": [

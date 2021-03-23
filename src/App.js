@@ -5,15 +5,18 @@ import AddList from "./components/AddList/AddList";
 import axios from 'axios'
 import './index.scss'
 import TaskItem from './components/TaskItem/TaskItem';
+import {Route, useHistory} from "react-router-dom";
 
 function App() {
     
     const [lists, setLists] = useState(null)
     const [colors, setColors] = useState(null)
     const [activeItem, setActiveItem] = useState(null)
+    let history = useHistory();
+
 
     useEffect(() => {
-        axios.get('http://localhost:3004/lists?_expand=color&_embed=tasks')
+            axios.get('http://localhost:3004/lists?_expand=color&_embed=tasks')
             .then(response => {
                 setLists(response.data)
                 setActiveItem(response.data[0])
@@ -26,8 +29,13 @@ function App() {
 
     }, [])
 
+    // useEffect(() => {
+    //     console.log(history.location.pathname)
+    // }, [history.location.pathname])
+
     const onClickItem = (item) => {
         setActiveItem(item)
+        history.push(`/lists/${item.id}`)
     }
 
     const onAddList = (obj) => {
@@ -35,9 +43,9 @@ function App() {
         setLists(newLists)
 
     }
+
     const onAddTaskItem = (id, newTask) => {
         const newLists = lists.map(item => {
-
             if (item.id === id) {
                 item.tasks = [...item.tasks, newTask]
             }
@@ -45,11 +53,13 @@ function App() {
         })
         setLists(newLists)
     }
+
     const removeListItem = (listId) => {
         const newLists = lists.filter(listItem => listItem.id !== listId)
         setLists(newLists)
         setActiveItem(lists[0])
     }
+
     const onEditListTitle = (id, title) => {
         const newTitle = window.prompt('Enter task title', title)
         if (!newTitle) return
@@ -72,7 +82,7 @@ function App() {
                 <div className="todo__sidebar">
 
 {/* // All tasks */}
-                    <List lists={[{id: 21, name: 'All tasks'}]} icon={listSvg} isRemoveable={false}/>
+                    <List lists={[{id: 21, name: 'All tasks'}]} icon={listSvg} isRemoveable={false} onClick={() => history.push('/')}/>
 
 {/* // Added lists */}
 
@@ -93,7 +103,9 @@ function App() {
 {/* // Tasks */}
                 </div>
                 <div className="todo__tasks">
-
+                    <Route exact path="/">
+                        {lists && activeItem && lists.map(list =><TaskItem key={list.id} listItem={list} onEditListTitle={onEditListTitle} onAddTaskItem={onAddTaskItem}/>)}
+                    </Route>
                     {lists && activeItem && <TaskItem listItem={activeItem} onEditListTitle={onEditListTitle} onAddTaskItem={onAddTaskItem}/>}
 
                 </div>

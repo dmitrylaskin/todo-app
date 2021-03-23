@@ -21,6 +21,30 @@
   font-family: 'Monserrat', sans-serif;
   color: rgb(81, 200, 236);
   margin-right: 10px;
+  &--green {
+    color: #42B883;
+  }
+  &--red {
+    color: #FF6464;
+  }
+  &--blue {
+    color: #64C4ED;
+  }
+  &--grey {
+    color: #FFBBCC;
+  }
+  &--lime {
+    color: #B6E6BD;
+  }
+  &--purple {
+    color: #C355F5;
+  }
+  &--black {
+    color: #4e4e53;
+  }
+  &--pink {
+    color: #C9D1D3;
+  }
 }
 .todo__tasks-title-icon {
   opacity: 0;

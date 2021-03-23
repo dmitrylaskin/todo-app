@@ -18,6 +18,30 @@
   color: #51c8ec;
   margin-right: 10px;
 }
+.todo__tasks-title-text--green {
+  color: #42B883;
+}
+.todo__tasks-title-text--red {
+  color: #FF6464;
+}
+.todo__tasks-title-text--blue {
+  color: #64C4ED;
+}
+.todo__tasks-title-text--grey {
+  color: #FFBBCC;
+}
+.todo__tasks-title-text--lime {
+  color: #B6E6BD;
+}
+.todo__tasks-title-text--purple {
+  color: #C355F5;
+}
+.todo__tasks-title-text--black {
+  color: #4e4e53;
+}
+.todo__tasks-title-text--pink {
+  color: #C9D1D3;
+}
 
 .todo__tasks-title-icon {
   opacity: 0;

@@ -73,11 +73,13 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: 400;}
   &__tasks {
     background: #fff;
     width: 700px;
-    min-height: 600px;
+    height: 600px;
+    overflow: auto;
     padding: 60px 0;
     .content {
       width: 550px;
       margin: 0 auto;
+      margin-bottom: 60px;
     }
   }
 }

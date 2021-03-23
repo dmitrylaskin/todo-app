@@ -9,7 +9,8 @@ const TaskItem = (props) => {
     return (
         <div className="content">
             <div className="todo__tasks-title">
-                <h2 className="todo__tasks-title-text">{props.listItem.name}</h2>
+
+                <h2 className={`todo__tasks-title-text todo__tasks-title-text--${props.listItem.color}`}>{props.listItem.name}</h2>
                 <img className="todo__tasks-title-icon" onClick={() => props.onEditListTitle(props.listItem.id, props.listItem.name)} src={editSvg} alt=""/>
             </div>
 
